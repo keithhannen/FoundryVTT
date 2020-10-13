@@ -22,8 +22,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "url": "https://github.com/keithhannen/FoundryVTT",
+  "manifest": "https://raw.githubusercontent.com/keithhannen/FoundryVTT/main/ADnD_2E/system.json",
+  "download": "https://github.com/keithhannen/FoundryVTT/archive/main.zip",
   "license": "LICENSE.txt"
 }
