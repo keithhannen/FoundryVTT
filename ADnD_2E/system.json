@@ -24,6 +24,6 @@
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/keithhannen/FoundryVTT",
   "manifest": "https://raw.githubusercontent.com/keithhannen/FoundryVTT/main/ADnD_2E/system.json",
-  "download": "htthttps://github.com/keithhannen/FoundryVTT.git",
+  "download": "https://github.com/keithhannen/FoundryVTT.git",
   "license": "LICENSE.txt"
 }
