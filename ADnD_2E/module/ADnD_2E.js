@@ -1,14 +1,14 @@
 // Import Modules
-import { BoilerplateActor } from "./actor/actor.js";
-import { BoilerplateActorSheet } from "./actor/actor-sheet.js";
-import { BoilerplateItem } from "./item/item.js";
-import { BoilerplateItemSheet } from "./item/item-sheet.js";
+import { ADnD_2EActor } from "./actor/actor.js";
+import { ADnD_2EActorSheet } from "./actor/actor-sheet.js";
+import { ADnD_2EItem } from "./item/item.js";
+import { ADnD_2EItemSheet } from "./item/item-sheet.js";
 
 Hooks.once('init', async function() {
 
-  game.boilerplate = {
-    BoilerplateActor,
-    BoilerplateItem,
+  game.ADnD_2E = {
+    ADnD_2EActor,
+    ADnD_2EItem,
     rollItemMacro
   };
 
@@ -22,14 +22,14 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Entity classes
-  CONFIG.Actor.entityClass = BoilerplateActor;
-  CONFIG.Item.entityClass = BoilerplateItem;
+  CONFIG.Actor.entityClass = ADnD_2EActor;
+  CONFIG.Item.entityClass = ADnD_2EItem;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("boilerplate", BoilerplateActorSheet, { makeDefault: true });
+  Actors.registerSheet("ADnD_2E", ADnD_2EActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("boilerplate", BoilerplateItemSheet, { makeDefault: true });
+  Items.registerSheet("ADnD_2E", ADnD_2EItemSheet, { makeDefault: true });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function() {
@@ -49,7 +49,7 @@ Hooks.once('init', async function() {
 
 Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => createBoilerplateMacro(data, slot));
+  Hooks.on("hotbarDrop", (bar, data, slot) => createADnD_2EMacro(data, slot));
 });
 
 /* -------------------------------------------- */
@@ -63,13 +63,13 @@ Hooks.once("ready", async function() {
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-async function createBoilerplateMacro(data, slot) {
+async function createADnD_2EMacro(data, slot) {
   if (data.type !== "Item") return;
   if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
   const item = data.data;
 
   // Create the macro command
-  const command = `game.boilerplate.rollItemMacro("${item.name}");`;
+  const command = `game.ADnD_2E.rollItemMacro("${item.name}");`;
   let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
@@ -77,7 +77,7 @@ async function createBoilerplateMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: { "boilerplate.itemMacro": true }
+      flags: { "ADnD_2E.itemMacro": true }
     });
   }
   game.user.assignHotbarMacro(macro, slot);
